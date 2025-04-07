@@ -1,0 +1,220 @@
+.signup-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('https://img.freepik.com/free-photo/modern-student-dormitory-room-interior-design_482257-8075.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+  
+  .signup-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at center,
+      rgba(79, 70, 229, 0.2) 0%,
+      rgba(45, 212, 191, 0.15) 50%,
+      rgba(0, 0, 0, 0.1) 100%
+    );
+    backdrop-filter: blur(15px);
+  }
+  
+  .signup-box {
+    width: 100%;
+    max-width: 320px;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    box-shadow: 
+      0 10px 25px rgba(0, 0, 0, 0.1),
+      0 0 15px rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    animation: floatIn 0.6s ease-out;
+  }
+  
+  @keyframes floatIn {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .signup-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #3b82f6, #06b6d4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: titlePulse 2s ease-in-out infinite;
+  }
+  
+  @keyframes titlePulse {
+    0%, 100% { 
+      filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.4));
+      transform: scale(1);
+    }
+    50% { 
+      filter: drop-shadow(0 0 15px rgba(6, 182, 212, 0.6));
+      transform: scale(1.02);
+    }
+  }
+  
+  .input-group {
+    position: relative;
+    margin-bottom: 20px;
+    transform-style: preserve-3d;
+  }
+  
+  .input-field {
+    width: 80%;
+    padding: 15px 20px 15px 45px;
+    border: 2px solid #e2e8f0;
+    border-radius: 18px;
+    font-size: 0.95rem;
+    background: rgba(250, 248, 248, 0);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateZ(0);
+  }
+  
+  .input-field:focus {
+    border-color: #3b82f6;
+    box-shadow: 
+      0 0 25px rgba(59, 130, 246, 0.2),
+      0 15px 25px rgba(59, 130, 246, 0.1);
+    transform: translateY(-4px) translateZ(10px);
+    background: rgba(239, 236, 236, 0);
+  }
+  
+  .input-icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #3b82f6;
+    font-size: 1.1rem;
+    transition: all 0.4s ease;
+  }
+  
+  .input-field:focus + .input-icon {
+    transform: translateY(-50%) scale(1.2) rotateY(360deg);
+    color: #06b6d4;
+    filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.5));
+  }
+  
+  .signup-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #3b82f6, #06b6d4);
+    color: white;
+    border: none;
+    border-radius: 18px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .signup-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      transparent,
+      rgba(187, 183, 183, 0.4),
+      transparent
+    );
+    animation: shimmer 3s infinite linear;
+  }
+  
+  @keyframes shimmer {
+    100% { left: 200%; }
+  }
+  
+  .signup-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 
+      0 20px 40px rgba(59, 130, 246, 0.4),
+      0 15px 25px rgba(6, 182, 212, 0.3);
+    letter-spacing: 2px;
+  }
+  
+  .login-link {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    transform: translateZ(15px);
+  }
+  
+  .login-link span {
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    padding-bottom: 2px;
+  }
+  
+  .login-link span::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(45deg, #4f46e5, #2dd4bf);
+    transition: width 0.3s ease;
+  }
+  
+  .login-link span:hover::after {
+    width: 100%;
+  }
+  
+  .error-message {
+    width: 90%;
+    margin: 10px auto;
+    padding: 12px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 12px;
+    color: #dc2626;
+    font-size: 0.9rem;
+    text-align: center;
+    animation: shake 0.5s ease;
+  }
+  
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+  }
+  
+  @media (max-width: 768px) {
+    .signup-box {
+      max-width: 280px;
+      padding: 20px;
+    }
+  
+    .signup-title {
+      font-size: 1.6rem;
+    }
+  
+    .input-field {
+      padding: 10px 15px 10px 35px;
+    }
+  }
