@@ -17,7 +17,7 @@ function Login() {
  
     const check_login = async () => {
         try {
-            const response = await axios.post("http://localhost:5000/login",{username,password});
+            const response = await axios.post("http://127.0.0.1:10000/login",{username,password});
             if(response.data.message === "Login successful") {
                 navigate('Dashboard');
                 if(response.data.count < 1) {
