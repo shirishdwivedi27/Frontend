@@ -47,7 +47,7 @@ function Signup() {
                 <p className="hms-subtext">Hostel Management System</p>
                 <h2 className="signup-title">
                     <FaUserPlus className="title-icon" />
-                    Create Account
+                    Create Accounts
                 </h2>
                 <form onSubmit={handleSubmit} className="signup-form">
                     <div className="input-group">
