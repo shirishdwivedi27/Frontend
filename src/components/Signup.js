@@ -29,7 +29,7 @@ function Signup() {
             return;
         }
         try {
-            const response = await axios.post('http://localhost:5000/signup', formData);
+            const response = await axios.post('https://flask-api-s.onrender.com/signup', formData);
             if (response.data.message === "Signup successful") {
                 navigate('/login');
             } else {

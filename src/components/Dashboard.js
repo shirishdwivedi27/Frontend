@@ -17,7 +17,7 @@ const Dashboard = () => {
   useEffect(() => {
     const Roomscount = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/getcoroom');
+        const response = await axios.get('https://flask-api-s.onrender.com/getcoroom');
         setCount(response.data.count);
       } catch (error) {
         setErrorMessage('Failed to load rooms. Please try again.');
@@ -27,7 +27,7 @@ const Dashboard = () => {
   
     const Roomscount_avail = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/rooms/vacant');
+        const response = await axios.get('https://flask-api-s.onrender.com/rooms/vacant');
         setvCount(response.data.count);
       } catch (error) {
         setErrorMessage('Failed to load rooms. Please try again.');
@@ -37,7 +37,7 @@ const Dashboard = () => {
   
     const Roomscount_booked = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/rooms/booked');
+        const response = await axios.get('https://flask-api-s.onrender.com/rooms/booked');
         setoCount(response.data.count);
       } catch (error) {
         setErrorMessage('Failed to load rooms. Please try again.');

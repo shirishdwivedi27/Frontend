@@ -14,7 +14,7 @@ function ComplainBox() {
     const handleSubmit = async (event) => {
         event.preventDefault(); // Prevents page refresh
         try {
-            const response = await axios.post("http://localhost:5000/complain_box", {
+            const response = await axios.post("https://flask-api-s.onrender.com/complain_box", {
                 quality,
                 star,
                 suggestion
