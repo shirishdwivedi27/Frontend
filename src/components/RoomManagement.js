@@ -16,7 +16,7 @@ function RoomManagement() {
 
   const room_book = async (room_no, roomDetails) => {
     try {
-      const response = await axios.post("http://localhost:5000/rooms/book", { room_no });
+      const response = await axios.post("https://flask-api-s.onrender.com/rooms/book", { room_no });
       setMessage(response.data.message);
       navigate("/room-details", { state: { room: roomDetails, message: "Room booked successfully!" } });
     } catch (error) {
@@ -26,7 +26,7 @@ function RoomManagement() {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/rooms');
+        const response = await axios.get('https://flask-api-s.onrender.com/rooms');
         setRooms(response.data.rooms);
       } catch (error) {
         setErrorMessage('Failed to load rooms. Please try again.');
