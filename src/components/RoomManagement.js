@@ -2,27 +2,28 @@ import React, { useState, useEffect } from 'react';
 import { FaBed, FaUserFriends, FaEdit, FaTrash, FaPlus, FaTimes } from 'react-icons/fa';
 import { MdMeetingRoom } from 'react-icons/md';
 import axios from 'axios';
-import './RoomManagement.css';
+//import '../styles/Login.css';
+import '../styles/RoomManagement.css';
 import { useNavigate } from "react-router-dom"; 
 
 // Add this new Modal component
 const AddRoomModal = ({ isOpen, onClose }) => {
-  const [adminData, setAdminData] = useState({
-    adminId: '',
-    Username: '',
-    email: '',
-    Password: '',
-  });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+   const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [message,setMessage]=useState("");
+  const check_login = async () => {
     try {
-      await axios.post('https://flask-api-s.onrender.com/admin/add', adminData);
-      onClose();
+        const response = await axios.post("https://flask-api-s.onrender.com/admin_lgn",{username,password});
+        if(response.data.message === "Login successful") {
+           // navigate('Dashboard');
+        } else {
+            setMessage(response.data.message);
+        }
     } catch (error) {
-      console.error('Error adding admin:', error);
+        setMessage(error.message);
     }
-  };
+};
 
   if (!isOpen) return null;
 
@@ -33,45 +34,30 @@ const AddRoomModal = ({ isOpen, onClose }) => {
           <FaTimes />
         </button>
         <h2>Admin Information</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={check_login}>
           <div className="form-group">
-            <label>Admin ID:</label>
+            <label>Admin Username:</label>
             <input
               type="text"
-              value={adminData.adminId}
-              onChange={(e) => setAdminData({...adminData, adminId: e.target.value})}
-              required
+              placeholder="Username" 
+              value={username} 
+              onChange={(e) => setUsername(e.target.value)}
+              style={{ paddingLeft: '45px' }}
             />
           </div>
-          <div className="form-group">
-            <label>Username:</label>
-            <input
-              type="text"
-              value={adminData.adminName}
-              onChange={(e) => setAdminData({...adminData, adminName: e.target.value})}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Email:</label>
-            <input
-              type="email"
-              value={adminData.email}
-              onChange={(e) => setAdminData({...adminData, email: e.target.value})}
-              required
-            />
-          </div>
+          
           <div className="form-group">
             <label>Password:</label>
             <input
               type="tel"
-              value={adminData.Password}
-              onChange={(e) => setAdminData({...adminData, Password: e.target.value})}
+              placeholder="Password"
+              value={password}
+              onChange={(e) =>setPassword(e.target.value)}
               required
             />
           </div>
          
-          <button type="submit" className="submit-btn">Add Room</button>
+          <button type="submit" className="submit-btn">Check admin</button>
         </form>
       </div>
     </div>
