@@ -1,16 +1,90 @@
 import React, { useState, useEffect } from 'react';
-import { FaBed, FaUserFriends, FaEdit, FaTrash, FaPlus } from 'react-icons/fa';
+import { FaBed, FaUserFriends, FaEdit, FaTrash, FaPlus, FaTimes } from 'react-icons/fa';
 import { MdMeetingRoom } from 'react-icons/md';
 import axios from 'axios';
-import '../styles/RoomManagement.css';
+import './RoomManagement.css';
 import { useNavigate } from "react-router-dom"; 
 
+// Add this new Modal component
+const AddRoomModal = ({ isOpen, onClose }) => {
+  const [adminData, setAdminData] = useState({
+    adminId: '',
+    Username: '',
+    email: '',
+    Password: '',
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post('https://flask-api-s.onrender.com/admin/add', adminData);
+      onClose();
+    } catch (error) {
+      console.error('Error adding admin:', error);
+    }
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <button className="modal-close" onClick={onClose}>
+          <FaTimes />
+        </button>
+        <h2>Admin Information</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>Admin ID:</label>
+            <input
+              type="text"
+              value={adminData.adminId}
+              onChange={(e) => setAdminData({...adminData, adminId: e.target.value})}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Username:</label>
+            <input
+              type="text"
+              value={adminData.adminName}
+              onChange={(e) => setAdminData({...adminData, adminName: e.target.value})}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Email:</label>
+            <input
+              type="email"
+              value={adminData.email}
+              onChange={(e) => setAdminData({...adminData, email: e.target.value})}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Password:</label>
+            <input
+              type="tel"
+              value={adminData.Password}
+              onChange={(e) => setAdminData({...adminData, Password: e.target.value})}
+              required
+            />
+          </div>
+         
+          <button type="submit" className="submit-btn">Add Room</button>
+        </form>
+      </div>
+    </div>
+  );
+};
 
 function RoomManagement() {
   const navigate = useNavigate();
   const [rooms, setRooms] = useState([]);
   const [filter, setFilter] = useState('all');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false); // Add this state
+
   const [room_no,setRoomno]=useState("");
   const [message,setMessage]=useState("");
 
@@ -106,9 +180,18 @@ function RoomManagement() {
       </div>
 
       {/* api call krni hai phir authenticate krna hai */}
-      <button className="add-room-btn" title="Add New Room">
-        <FaPlus />add_room
+      <button 
+        className="add-room-btn" 
+        title="Add New Room"
+        onClick={() => setIsModalOpen(true)}
+      >
+        <FaPlus />Add Room
       </button>
+
+      <AddRoomModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </div>
   );
 }
