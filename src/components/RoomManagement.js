@@ -49,7 +49,7 @@ const AddRoomModal = ({ isOpen, onClose }) => {
           <div className="form-group">
             <label>Password:</label>
             <input
-              type="tel"
+              type="text"
               placeholder="Password"
               value={password}
               onChange={(e) =>setPassword(e.target.value)}
